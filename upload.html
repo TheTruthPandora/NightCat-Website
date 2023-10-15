@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" type="image/x-icon" href="./logo/nightcat.jpg">
+  <title>Upload to Discord</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h1>Upload to Discord</h1>
+  <input type="file" id="file-input">
+
+  <script>
+    window.onload = function() {
+      var fileInput = document.getElementById('file-input');
+      fileInput.addEventListener('change', handleFileSelect, false);
+
+      if (fileInput.files.length > 0) {
+        var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append('file', file);
+        sendToDiscord(formData);
+      }
+    };
+
+    function handleFileSelect(event) {
+      var file = event.target.files[0];
+
+      if (file) {
+        var formData = new FormData();
+        formData.append('file', file);
+        sendToDiscord(formData);
+      }
+    }
+
+    function sendToDiscord(formData) {
+      var webhookUrl = 'https://discord.com/api/webhooks/1163109140219039784/wmd7euWKtPm1nFgKU99LRf_yyg4GVOE_sj1_PINwJhLqGX2HXZkZ10ToxWst8BRVunsT';
+
+      axios.post(webhookUrl, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(function(response) {
+          console.log('???????? Discord');
+        })
+        .catch(function(error) {
+          console.error('??? Discord ???:', error);
+        });
+    }
+  </script>
+</body>
+</html>
