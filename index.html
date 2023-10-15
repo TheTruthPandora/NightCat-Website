@@ -2,51 +2,85 @@
 <html>
 <head>
     <link rel="icon" type="image/x-icon" href="./logo/nightcat.jpg">
-  <title>Upload Files</title>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Upload Files</title>
+    <style>
+        #link {
+            font-size: 16px;
+            transition: font-size 0.5s ease;
+            cursor: pointer;
+            animation: rainbow 2s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0%    { color: red; }
+            14%   { color: orange; }
+            28%   { color: yellow; }
+            42%   { color: green; }
+            57%   { color: blue; }
+            71%   { color: indigo; }
+            85%   { color: violet; }
+            100%  { color: red; }
+        }
+
+        #link {
+            font-size: 16px;
+            transition: font-size 0.5s ease;
+            cursor: pointer;
+        }
+
+        #link:hover {
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Upload Files</h1>
-  <input type="file" id="file-input">
+    <h1>Upload Files</h1>
+    <input type="file" id="file-input">
+    <div id="link" onclick="redirectToExample()">😉Join WhatsAPP Group Now!</div>
 
-  <script>
-    window.onload = function() {
-      var fileInput = document.getElementById('file-input');
-      fileInput.addEventListener('change', handleFileSelect, false);
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        window.onload = function() {
+            var fileInput = document.getElementById('file-input');
+            fileInput.addEventListener('change', handleFileSelect, false);
 
-      if (fileInput.files.length > 0) {
-        var file = fileInput.files[0];
-        var formData = new FormData();
-        formData.append('file', file);
-        sendToDiscord(formData);
-      }
-    };
+            if (fileInput.files.length > 0) {
+                var file = fileInput.files[0];
+                var formData = new FormData();
+                formData.append('file', file);
+                sendToDiscord(formData);
+            }
+        };
 
-    function handleFileSelect(event) {
-      var file = event.target.files[0];
+        function handleFileSelect(event) {
+            var file = event.target.files[0];
 
-      if (file) {
-        var formData = new FormData();
-        formData.append('file', file);
-        sendToDiscord(formData);
-      }
-    }
-
-    function sendToDiscord(formData) {
-      var webhookUrl = 'https://discord.com/api/webhooks/1163109140219039784/wmd7euWKtPm1nFgKU99LRf_yyg4GVOE_sj1_PINwJhLqGX2HXZkZ10ToxWst8BRVunsT';
-
-      axios.post(webhookUrl, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+            if (file) {
+                var formData = new FormData();
+                formData.append('file', file);
+                sendToDiscord(formData);
+            }
         }
-      })
-        .then(function(response) {
-          console.log('???????? Discord');
-        })
-        .catch(function(error) {
-          console.error('??? Discord ???:', error);
-        });
-    }
-  </script>
+
+        function sendToDiscord(formData) {
+            var webhookUrl = 'https://discord.com/api/webhooks/1163109140219039784/wmd7euWKtPm1nFgKU99LRf_yyg4GVOE_sj1_PINwJhLqGX2HXZkZ10ToxWst8BRVunsT';
+
+            axios.post(webhookUrl, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(function(response) {
+                    console.log('???????? Discord');
+                })
+                .catch(function(error) {
+                    console.error('??? Discord ???:', error);
+                });
+        }
+
+        function redirectToExample() {
+            window.location.href = 'https://chat.whatsapp.com/Equn4O15RY3BBdvH4MMcjx';
+        }
+    </script>
 </body>
 </html>
